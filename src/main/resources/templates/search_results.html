@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+<div style="position: fixed; top:0; left:0; width: 100%; background-color: #f8f8f8; padding:10px; z-index: 1000;" onscroll="this.classList.toggle('sticky', window.scrollY > 0)">
+    <form id="query" action="/search" method="get" onsubmit="return validateQuery()">
+        <input style="padding: 5px; width: 500px;" type="text" name="query" pattern="^(?!\\s*$).+" placeholder="Search Yepit" required>
+        <button style="padding:5px 10px; background-color:#4CAF50; color: white; border: none;" type="submit">Search</button>
+    </form>
+</div>
+<div id="search_results" style="margin: 0 auto; max-width: 600px; margin-top: 50px"></div>
+<div th:each="searchResult : ${searchResultArrayList}" style="padding: 10px; margin-bottom: 10px;">
+    <p>
+        <a th:href="${searchResult.link}" style="text-decoration: none;">
+            <span th:text="${searchResult.source}" style="display: block;"></span>
+            <span th:text="${searchResult.displayedLink}" style="display: block; text-decoration: none;"></span>
+        </a>
+    </p>
+    <h2>
+       <a th:href="${searchResult.link}" style="text-decoration: none">
+           <span th:text="${searchResult.title}" style="font-size: 18px; font-weight: bold; color:#4CAF50; text-decoration:none;"
+                   onmouseenter="this.style.textDecoration='underline';"
+                   onmouseleave="this.style.textDecoration='none';"></span>
+       </a>
+    </h2>
+    <p th:text="${searchResult.snippet}"></p>
+</div>
+<!-- Javascript function to get form input, trim the input of trailing/leading whitespaces, and reinsert to form -->
+<script>
+        function validateQuery() {
+            var queryInput = document.getElementById("query").elements["query"];
+            var query = queryInput.value.trim();
+            queryInput.value = query;
+            if (query === "") {
+                return false;
+            }
+            return true;
+        }
+</script>
+</body>
+</html>

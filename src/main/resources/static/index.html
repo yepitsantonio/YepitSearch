@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yepit Search</title>
+</head>
+<body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 75vh; margin: 0;">
+<h1 style="font-size: 100px; color:#4CAF50; margin-bottom: 10px; text-align: center;">Yepit</h1>
+    <div style="display: flex; flex-direction: column; align-items: center;" class = "container">
+        <form id="query" action="/search" method="get" onsubmit="return validateQuery()">
+            <input style="padding: 5px; width: 500px;" type="text" name="query" pattern="^(?!\\s*$).+" placeholder="Search Yepit" required>
+            <button style="padding:5px 10px; background-color:#4CAF50; color: white; border: none;" type="submit">Search</button>
+        </form>
+    </div>
+    <script>
+        function validateQuery() {
+            var queryInput = document.getElementById("query").elements["query"];
+            var query = queryInput.value.trim();
+            queryInput.value = query;
+            if (query === "") {
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
