@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class SearchController {
 
     //Singleton pattern for API key. Create an account at serpapi.com for your api key.
-    private final String api_key = "6e0cf279ff1335075a2f412aa14de4c9093333079ae2ccd15bbb6321456aa494";
+    private final String api_key = "<Your API Key";
 
     //Annotation maps GET request to the path endpoint. Value of query parameter is bound to String query from the html input. Model passes data to the view.
     @GetMapping("/search")
